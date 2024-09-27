@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>M.Y.R.Y</title>
+    <style>
+   
+    </style>
+     <link rel="stylesheet" href="chat.css">
+</head>
+
+<body>
+   
+        <div class="container">
+            <div class="left-side">
+                <h2></h2>
+                <div class="input-group">
+                    <label for="message">messages:</label>
+                    <textarea id="message" rows="4"></textarea>
+                </div>
+                <div class="input-group">
+                    <label for="image">pictures</label>
+                    <input type="file" id="image">
+                </div>
+                <button class="send-button" onclick="sendMessage()">send</button>
+            </div>
+            <div class="right-side">
+                <h2>الرسائل المرسلة</h2>
+                <div id="messages" class="messages"></div>
+            </div>
+        </div>
+    
+        <script>
+                function sendMessage() {
+            var messageText = document.getElementById('message').value;
+            var imageInput = document.getElementById('image');
+            var messagesContainer = document.getElementById('messages');
+
+            var messageDiv = document.createElement('div');
+            messageDiv.classList.add('message');
+
+            if (messageText) {
+                var textNode = document.createTextNode(messageText);
+                messageDiv.appendChild(textNode);
+            }
+
+            if (imageInput.files && imageInput.files[0]) {
+                var img = document.createElement('img');
+                img.src = URL.createObjectURL(imageInput.files[0]);
+                img.style.maxWidth = '100%';
+                img.style.marginTop = '10px';
+                messageDiv.appendChild(img);
+            }
+
+            messagesContainer.appendChild(messageDiv);
+
+            // Clear inputs
+            document.getElementById('message').value = '';
+            imageInput.value = '';
+        }
+        </script>
+        </body>
+</html>
